@@ -25,5 +25,15 @@ class Bank
     end
   end
 
+  def withdrawal(person, cash)
+    if person.cash >= cash
+      person.cash = person.cash + cash
+      @balance -= cash
+      "#{person.name} has withdrawn #{cash} galleons. Balance: #{balance}"
+    else
+      "Insufficient funds."
+    end
+  end
+
 
 end

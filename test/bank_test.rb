@@ -26,22 +26,35 @@ class BankTest < Minitest::Test
     assert_instance_of Bank, @person1.banks.first
   end
 
-  def test_it_can_make_deposits
+  def test_it_can_make_deposits_if_it_has_cash
     expected = "750 galleons have been deposited into Minerva's Chase account. Balance: 750 Cash: 250"
     actual = @chase.deposit(@person1, 750)
 
     assert_equal 250, @person1.cash
     assert_equal 750, @chase.balance
     assert_equal expected, actual
+
+    expected1 = "Minerva does not have enough cash to perform this deposit."
+    actual1 = @chase.deposit(@person1, 5000)
+
+    assert_equal 250, @person1.cash
+    assert_equal 750, @chase.balance
+    assert_equal expected1, actual1
   end
 
-  def test_it_cant_deposit_if_does_not_have
-    expected = "Minerva does not have enough cash to perform this deposit."
-    actual = @chase.deposit(@person1, 5000)
+  def test_it_can_withdrawal_if_it_has_cash
+    @chase.deposit(@person1, 750)
 
-    assert_equal expected, actual
+    expected = @chase.withdrawal(@person1, 250)
+    result = "Minerva has withdrawn 250 galleons. Balance: 250"
+
+    assert_equal 500, @person1.cash
+
+    @chase.withdrawal(@person1, 25000)
+
+    expected1 = "Insufficient funds."
+    result1 = @chase.withdrawal(@person1, 25000)
   end
 
-  
 
 end
