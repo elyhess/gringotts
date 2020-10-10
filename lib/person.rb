@@ -1,8 +1,8 @@
 class Person
-  attr_reader :name, :galleons, :banks
+  attr_reader :name, :cash, :banks
 
-  def initialize(name, galleons)
-    @galleons = galleons
+  def initialize(name, cash)
+    @cash = cash
     @name = name
     @banks = []
   end

@@ -14,7 +14,7 @@ class PersonTest < Minitest::Test
 
     assert_instance_of Person, @person1
     assert_equal "Minerva", @person1.name
-    assert_equal 1000, @person1.galleons
+    assert_equal 1000, @person1.cash
     assert_equal [], @person1.banks
   end
 
