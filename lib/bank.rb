@@ -8,8 +8,8 @@ class Bank
 
   def open_account(person)
     @accounts << person
-    person.banks << name
-    "An account has been opened for #{person.name} with #{name}."
+    person.banks << self
+    "An account has been opened for #{person.name} with #{self.name}."
   end
 
 

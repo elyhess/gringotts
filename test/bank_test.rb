@@ -27,4 +27,7 @@ class BankTest < Minitest::Test
     assert_equal @person1, @chase.accounts[0]
   end
 
+  def test_it_can_make_deposits
+  end
+
 end
