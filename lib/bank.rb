@@ -1,15 +1,18 @@
 class Bank
-  attr_reader :name, :accounts
+  attr_reader :name, :balance
 
   def initialize(name)
     @name = name
-    @accounts = []
+    @balance = 0
+  end
+
+  def balance
+    @balance
   end
 
   def open_account(person)
-    @accounts << person
     person.banks << self
-    "An account has been opened for #{person.name} with #{self.name}."
+    "An account has been opened for #{person.name} with #{name}."
   end
 
 
