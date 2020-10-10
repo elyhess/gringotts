@@ -16,8 +16,13 @@ class Bank
   end
 
   def deposit(person, cash)
-    person.cash = person.cash - cash
-    @balance += cash
+    if person.cash >= cash
+      person.cash = person.cash - cash
+      @balance += cash
+      "#{balance} galleons have been deposited into #{person.name}'s Chase account. Balance: #{@balance} Cash: #{person.cash}"
+    else
+      "#{person.name} does not have enough cash to perform this deposit."
+    end
   end
 
 

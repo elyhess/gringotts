@@ -19,7 +19,6 @@ class BankTest < Minitest::Test
   end
 
   def test_it_can_open_account
-
     expected = "An account has been opened for Minerva with JP Morgan Chase."
     actual =  @chase.open_account(@person1)
 
@@ -28,10 +27,21 @@ class BankTest < Minitest::Test
   end
 
   def test_it_can_make_deposits
-    @chase.deposit(@person1, 750)
+    expected = "750 galleons have been deposited into Minerva's Chase account. Balance: 750 Cash: 250"
+    actual = @chase.deposit(@person1, 750)
 
     assert_equal 250, @person1.cash
     assert_equal 750, @chase.balance
+    assert_equal expected, actual
   end
+
+  def test_it_cant_deposit_if_does_not_have
+    expected = "Minerva does not have enough cash to perform this deposit."
+    actual = @chase.deposit(@person1, 5000)
+
+    assert_equal expected, actual
+  end
+
+  
 
 end
