@@ -23,13 +23,15 @@ class BankTest < Minitest::Test
     expected = "An account has been opened for Minerva with JP Morgan Chase."
     actual =  @chase.open_account(@person1)
 
-
     assert_equal expected, actual
     assert_instance_of Bank, @person1.banks.first
   end
 
   def test_it_can_make_deposits
+    @chase.deposit(@person1, 750)
 
+    assert_equal 250, @person1.cash
+    assert_equal 750, @chase.balance
   end
 
 end

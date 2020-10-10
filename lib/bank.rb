@@ -15,5 +15,10 @@ class Bank
     "An account has been opened for #{person.name} with #{name}."
   end
 
+  def deposit(person, cash)
+    person.cash = person.cash - cash
+    @balance += cash
+  end
+
 
 end
