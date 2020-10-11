@@ -7,13 +7,13 @@ class Bank
     @balance = 0
   end
 
-  def balance
-    @balance
-  end
-
   def open_account(person)
     person.banks << self
     "An account has been opened for #{person.name} with #{name}."
+  end
+
+  def total_cash
+    "Total Cash: #{@balance}"
   end
 
   def deposit(person, cash)
