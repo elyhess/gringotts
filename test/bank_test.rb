@@ -24,7 +24,7 @@ class BankTest < Minitest::Test
     actual =  @chase.open_account(@person1)
 
     assert_equal expected, actual
-    assert_instance_of Bank, @person1.banks.first
+    assert_equal true, @person1.banks.include?("JP Morgan Chase")
   end
 
   def test_it_can_make_deposits_if_it_has_cash
@@ -92,18 +92,32 @@ class BankTest < Minitest::Test
   end
 
   def test_it_gives_total
+    @person2 = Person.new("John", 1000)
     @wells_fargo.open_account(@person1)
     @chase.open_account(@person1)
+    @wells_fargo.open_account(@person2)
+    @chase.open_account(@person2)
+
     @chase.deposit(@person1, 500)
     @wells_fargo.deposit(@person1, 500)
+
+    @chase.deposit(@person2, 100)
+    @wells_fargo.deposit(@person2, 300)
+
+    @chase.accounts
+
     @chase.transfer(@person1, @wells_fargo, 250)
+    @wells_fargo.transfer(@person2, @chase, 100)
+
+    @chase.balance
+    @wells_fargo.balance
 
     assert_equal 0, @person1.cash
-    assert_equal 750, @wells_fargo.balance
-    assert_equal 250, @chase.balance
+    assert_equal 950, @wells_fargo.balance
+    assert_equal 450, @chase.balance
 
-    assert_equal "Total Cash: 250", @chase.total_cash
-    assert_equal "Total Cash: 750", @wells_fargo.total_cash
+    assert_equal "Total Cash: 450", @chase.total_cash
+    assert_equal "Total Cash: 950", @wells_fargo.total_cash
   end
 
 
